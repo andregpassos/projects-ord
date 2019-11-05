@@ -29,6 +29,7 @@ void max_heapify(int arvore[], int i) {
 }
 
 void build_max_heap(int arvore[]){
+    //comeca dos pais (nao faz as folhas)
     for (int i = tamanho_heap/2; i >= 1; i--)
         max_heapify(arvore, i);
 }
@@ -38,10 +39,12 @@ void heap_sort(int arvore[]) {
 
     build_max_heap(arvore);
     for (int i = comprimento; i > 1; i--) {
+        //troca o valor da ultima posicao com a raiz
         temp = arvore[i];
         arvore[i] = arvore[1];
         arvore[1] = temp;
-
+        
+        //reduz o tamanho do heap e joga novamente o maior valor pra raiz
         tamanho_heap = tamanho_heap -1;
         max_heapify(arvore, 1);
     }
