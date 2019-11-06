@@ -68,7 +68,7 @@ int main() {
         printf("Heap binario desordenado:\n\n");
 
         for (int i = 1; i <= arvore[0]; i++)
-            printf("A[%d] = %ld\n", i, arvore[i]);
+            printf("A[%d] = %d\n", i, arvore[i]);
 
         printf("\n");
 
@@ -77,7 +77,7 @@ int main() {
         printf("Heap binario apos ordenacao por heapsort:\n\n");
 
         for (int i = 1; i <= arvore[0]; i++)
-            printf("A[%d] = %ld\n", i, arvore[i]);
+            printf("A[%d] = %d\n", i, arvore[i]);
     } else {
         FILE *arq, *escrita;
         ///////////// LEITURA DE ARQUIVO /////////////////
@@ -93,7 +93,7 @@ int main() {
 
             while (!feof(arq)) //verifica se esta no final do arquivo - feof
             {
-                //fscanf(arq, "%ld", &numero); //le a linha atual
+                //fscanf(arq, "%d", &numero); //le a linha atual
                 result = fgets(Linha, 100, arq);
                 if (result){
                     numero = atoi(Linha);
@@ -124,7 +124,7 @@ int main() {
         printf("Heap binario apos ordenacao por heapsort:\n\n");
 
         for (int i = 1; i <= vetor[0]; i++)
-                printf("A[%ld] = %ld; ", i, vetor[i]);
+                printf("A[%d] = %d; ", i, vetor[i]);
         } else {
 
         //////////////////////ESCRITA DE ARQUIVO///////////////////
@@ -135,10 +135,10 @@ int main() {
                 return -1;
             }
 
-            fprintf(escrita, "%ld\n", vetor[0]);
+            fprintf(escrita, "%d\n", vetor[0]);
 
             for (int i = 1; i <= vetor[0]; i++)
-                fprintf(escrita, "%ld\n", vetor[i]);
+                fprintf(escrita, "%d\n", vetor[i]);
 
         fclose(escrita);
         //////////////////////////////////////////////////////////
