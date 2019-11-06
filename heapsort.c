@@ -121,7 +121,7 @@ int main() {
 
         // MENSAGEM NO TERMINAL
         if (!strcmp (resposta, "tela")) {
-            printf("Heap binario apos ordenacao por heapsort:\n\n");
+            printf("\nHeap binario apos ordenacao por heapsort:\n\n");
 
             for (int i = 1; i <= vetor[0]; i++)
                     printf("%d ", vetor[i]);
