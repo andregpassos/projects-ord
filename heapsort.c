@@ -55,10 +55,17 @@ int main() {
     //posicao 0 do vetor indica o tamanho do heap.
     //heap binario comeca da posicao 1.
     tamanho_heap = arvore[0];
+    
+    printf("Heap binario desordenado:\n\n");
 
+    for (int i = 1; i <= arvore[0]; i++)
+        printf("A[%d] = %d\n", i, arvore[i]);
+    
+    printf("\n");
+    
     heap_sort(arvore);
-
-    printf("Heap binario ordenado por heapsort:\n\n");
+    
+    printf("Heap binario apos ordenacao por heapsort:\n\n");
 
     for (int i = 1; i <= arvore[0]; i++)
         printf("A[%d] = %d\n", i, arvore[i]);
