@@ -4,7 +4,7 @@
 
 int tamanho_heap = 0;
 
-void max_heapify(long int arvore[], int i) {
+void max_heapify(int arvore[], int i) {
     int l, r, maior, temp;
 
     l = 2*i; //ESQUERDO(i)
@@ -29,13 +29,13 @@ void max_heapify(long int arvore[], int i) {
     }
 }
 
-void build_max_heap(long int arvore[]){
+void build_max_heap(int arvore[]){
     //comeca dos pais (nao faz as folhas)
     for (int i = tamanho_heap/2; i >= 1; i--)
         max_heapify(arvore, i);
 }
 
-void heap_sort(long int arvore[]) {
+void heap_sort(int arvore[]) {
     int temp, comprimento = tamanho_heap;
 
     build_max_heap(arvore);
@@ -52,7 +52,7 @@ void heap_sort(long int arvore[]) {
 }
 
 int main() {
-    long int vetor[MAX];
+    int vetor[MAX];
     int resp;
 
     printf("Digite 0 para ler o vetor padrao, ou outro numero para ler um arquivo.\n>");
@@ -60,7 +60,7 @@ int main() {
     printf("\n");
 
     if (!resp) {
-        long int arvore[] = {6,8,9,7,16,10,14};
+        int arvore[] = {6,8,9,7,16,10,14};
         //posicao 0 do vetor indica o tamanho do heap.
         //heap binario comeca da posicao 1.
         tamanho_heap = arvore[0];
@@ -68,7 +68,7 @@ int main() {
         printf("Heap binario desordenado:\n\n");
 
         for (int i = 1; i <= arvore[0]; i++)
-            printf("A[%d] = %d\n", i, arvore[i]);
+            printf("A[%d] = %ld\n", i, arvore[i]);
 
         printf("\n");
 
@@ -77,9 +77,9 @@ int main() {
         printf("Heap binario apos ordenacao por heapsort:\n\n");
 
         for (int i = 1; i <= arvore[0]; i++)
-            printf("A[%d] = %d\n", i, arvore[i]);
+            printf("A[%d] = %ld\n", i, arvore[i]);
     } else {
-        FILE *arq;
+        FILE *arq, *escrita;
         ///////////// LEITURA DE ARQUIVO /////////////////
         arq = fopen("num.100000.1.in", "rt");
             if (arq == NULL)  // Se houve erro na abertura
@@ -88,12 +88,19 @@ int main() {
                 return -1;
             }
 
-            long int i = 0, numero;
+            int i = 0, numero;
+            char *result, Linha[100];
 
             while (!feof(arq)) //verifica se esta no final do arquivo - feof
             {
-                fscanf(arq, "%ld", &numero); //le a linha atual
-                vetor[i] = numero;
+                //fscanf(arq, "%ld", &numero); //le a linha atual
+                result = fgets(Linha, 100, arq);
+                if (result){
+                    numero = atoi(Linha);
+                    vetor[i] = numero;
+                }
+
+                //vetor[i] = numero;
                 i++;
             }
         fclose(arq);
@@ -102,10 +109,41 @@ int main() {
 
         heap_sort(vetor);
 
+        char resposta[4];
+
+        do {
+            printf("\nDeseja imprimir na tela, ou gravar no arquivo 'resposta.txt'? (tela/arq)\n");
+            scanf("%s", &resposta);
+
+            if (strcmp (resposta, "tela") && strcmp (resposta, "arq"))
+                printf("\nresposta invalida!\n");
+        }while (strcmp (resposta, "tela") && strcmp (resposta, "arq"));
+
+        // MENSAGEM NO TERMINAL
+        if (!strcmp (resposta, "tela")) {
         printf("Heap binario apos ordenacao por heapsort:\n\n");
 
-        for (long int i = 1; i <= vetor[0]; i++)
-            printf("A[%d] = %d\n", i, vetor[i]);
+        for (int i = 1; i <= vetor[0]; i++)
+                printf("A[%ld] = %ld; ", i, vetor[i]);
+        } else {
+
+        //////////////////////ESCRITA DE ARQUIVO///////////////////
+        escrita = fopen("resposta.txt", "w");
+            if (escrita == NULL)  // Se houve erro na abertura
+            {
+                printf("Problemas na abertura do arquivo\n");
+                return -1;
+            }
+
+            fprintf(escrita, "%ld\n", vetor[0]);
+
+            for (int i = 1; i <= vetor[0]; i++)
+                fprintf(escrita, "%ld\n", vetor[i]);
+
+        fclose(escrita);
+        //////////////////////////////////////////////////////////
+        printf("\nArquivo 'reposta.txt' gravado com sucesso!\n");
+        }
     }
 
     return 0;
