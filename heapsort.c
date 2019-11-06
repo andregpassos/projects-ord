@@ -124,7 +124,7 @@ int main() {
             printf("Heap binario apos ordenacao por heapsort:\n\n");
 
             for (int i = 1; i <= vetor[0]; i++)
-                    printf("%d; ", vetor[i]);
+                    printf("%d ", vetor[i]);
         } else {
 
         //////////////////////ESCRITA DE ARQUIVO///////////////////
