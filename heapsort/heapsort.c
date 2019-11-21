@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define MAX 100001
 
 int tamanho_heap = 0;
 
+//joga o maior valor para a raiz e executa o recursivo
 void max_heapify(int arvore[], int i) {
     int l, r, maior, temp;
 
@@ -29,12 +31,14 @@ void max_heapify(int arvore[], int i) {
     }
 }
 
+//constroi uma fila de prioridade maxima
 void build_max_heap(int arvore[]){
     //comeca dos pais (nao faz as folhas)
     for (int i = tamanho_heap/2; i >= 1; i--)
         max_heapify(arvore, i);
 }
 
+//ordenacao por heapsort
 void heap_sort(int arvore[]) {
     int temp, comprimento = tamanho_heap;
 
@@ -51,7 +55,7 @@ void heap_sort(int arvore[]) {
     }
 }
 
-//para ordenar numeros maiores que 2 bilhoes
+//para numeros maiores que 2 bilhoes
 void max_heapify_db(double arvore[], int i) {
     int l, r, maior;
     double temp;
@@ -78,14 +82,14 @@ void max_heapify_db(double arvore[], int i) {
     }
 }
 
-//para ordenar numeros maiores que 2 bilhoes
+//para numeros maiores que 2 bilhoes
 void build_max_heap_db(double arvore[]){
     //comeca dos pais (nao faz as folhas)
     for (int i = tamanho_heap/2; i >= 1; i--)
         max_heapify_db(arvore, i);
 }
 
-//para ordenar numeros maiores que 2 bilhoes
+//para numeros maiores que 2 bilhoes
 void heap_sort_db(double arvore[]) {
     int comprimento = tamanho_heap;
     double temp;
