@@ -16,15 +16,11 @@ typedef struct noDeHuffman {
 void contFrequencia(const char *arquivoLeitura, unsigned int vetorFrequencia[]) {
 	byte c;
 
-    FILE *leitura, *escrita;
+    FILE *leitura;
 
     leitura = fopen(arquivoLeitura, "rb");
-
-	//soma +1 naquela posicao do vetor de frequencia
-	//cada vez que ela for lida novamente.
-
-	//for (int i = 0; i < 256; i++) vetorFrequencia[i] = i; //TESTE
-
+    
+    //soma +1 naquela posicao do vetor de frequencia cada vez que ela for lida novamente.
     while (!feof(leitura))
     {
         c = getc(leitura);
@@ -53,6 +49,5 @@ int main (int argc, char* argv[]) {
                 printf("%i, ", vetorFrequencia[i]);
             printf("%i}\n\n", vetorFrequencia[255]);
         }
-
-
+	return 0;
 }
