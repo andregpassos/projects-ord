@@ -5,23 +5,33 @@
 //tipo byte (como eh unsigned char, vai de 0 a 255);
 typedef unsigned char byte;
 
+typedef struct noDeHuffman {
+    byte chave;
+    unsigned int freq;
+    struct noDeHuffman *esq;
+    struct noDeHuffman *dir;
+} noDeHuffman;
+
 //conta a quantidade de vezes que cada byte é lido e armazena num vetor de frequencias.
-void contFrequencia(const char *arquivoEntrada, unsigned int vetorFrequencia[]) {
+void contFrequencia(const char *arquivoLeitura, unsigned int vetorFrequencia[]) {
 	byte c;
 
-    FILE *arquivo = fopen(arquivoEntrada, "rb");
-	//fread usada para ler de byte a byte
+    FILE *leitura, *escrita;
+
+    leitura = fopen(arquivoLeitura, "rb");
+
 	//soma +1 naquela posicao do vetor de frequencia
 	//cada vez que ela for lida novamente.
 
 	//for (int i = 0; i < 256; i++) vetorFrequencia[i] = i; //TESTE
 
-    while (fread(&c, 1, 1, arquivo))
+    while (!feof(leitura))
     {
-        vetorFrequencia[(byte) c]++;
+        c = getc(leitura);
+        vetorFrequencia[c]++;
     }
 
-    fclose(arquivo);
+    fclose(leitura);
 }
 
 
@@ -35,21 +45,14 @@ int main (int argc, char* argv[]) {
             printf("\nExemplo: ./huffman arquivo.extensao -f\n\n");
         }
 
-        printf("Vetor de frequencias antes de chamar o metodo:\n");
-        printf("vetorF = { ");
-
-        for (int i = 0; i < 256; i++)
-            printf("%i, ", vetorFrequencia[i]);
-        printf("}\n\n");
-
         if (!strcmp("-f", argv[2])) {
             contFrequencia(argv[1], vetorFrequencia);
+
+            printf("vetorFrequencia = {");
+            for (int i = 0; i < 255; i++)
+                printf("%i, ", vetorFrequencia[i]);
+            printf("%i}\n\n", vetorFrequencia[255]);
         }
 
-        printf("Vetor de frequencias apos chamar o metodo:\n");
-        printf("vetorF = { ");
 
-        for (int i = 0; i < 256; i++)
-            printf("%i, ", vetorFrequencia[i]);
-        printf("}\n\n");
 }
