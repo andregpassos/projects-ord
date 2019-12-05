@@ -39,12 +39,12 @@ noDeLista *novoNoDeLista(noDeHuffman *nArv)
 
 noDeHuffman *novoNoDeHuffman(byte c, int freq, noDeHuffman *esq, noDeHuffman *dir)
 {
-    // Aloca memória
     noDeHuffman *novo;
 
+    //aloca memoria e verifica se foi possivel alocar
     if (!(novo = malloc(sizeof(*novo)))) return NULL;
 
-    // Atribui na árvore os valores passados como parâmetro
+    //"construtor" do nó
     novo->chave = c;
     novo->freq = freq;
     novo->esq = esq;
@@ -53,7 +53,7 @@ noDeHuffman *novoNoDeHuffman(byte c, int freq, noDeHuffman *esq, noDeHuffman *di
     return novo;
 }
 
-//Insere uma novo nó na lista passada como parametro.
+//insere uma novo nó na lista passada como parametro.
 void inserirLista(noDeLista *n, lista *lista)
 {
     //insere um novo nó no inicio, caso a lista seja vazia
@@ -92,7 +92,8 @@ void inserirLista(noDeLista *n, lista *lista)
     lista->elementos++;
 }
 
-noDeHuffman *popMinLista(lista *lista)
+//retorna e libera o primeiro elemento da lista (parecido com o extract_min())
+noDeHuffman *popLista(lista *lista)
 {
 
     //ponteiro auxilar que aponta para o primeiro nó da lista
