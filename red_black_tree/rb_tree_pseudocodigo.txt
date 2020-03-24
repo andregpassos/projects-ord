@@ -1,0 +1,18 @@
+rb_tree_insertion(*tree, value):
+	if tree is NULL:
+		tree->root = bst_tree_insertion(tree->root, node) # insercao de arvore binaria de busca
+		tree->root->color = 'b'
+		return tree
+	else:
+		tree->root = bst_tree_insertion(tree)
+		tree->node->color = 'r'
+
+		if tree->f->color == 'b': #end of insertion
+			return tree
+		else:
+			if node->uncle->color == 'b' or NULL:
+				rotation(node)
+				recolor(node)
+			if node->uncle->color == 'r':
+				recolor(node)
+#end of function
